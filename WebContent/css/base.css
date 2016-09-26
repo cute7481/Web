@@ -1,0 +1,419 @@
+@font-face{
+	font-family:"Dokdo";
+	src : url(../font/Dok_do.ttf)format('truetype');
+}
+@font-face{
+	font-family:"Misaeng";
+	src : url(../font/SDMiSaeng.ttf)format('truetype');
+}
+label{
+	font-family:Misaeng;
+	font-size:25px;
+	color:EDE8D1;
+	padding-left:10px;
+}
+body{
+	background-image:url("../img/bg_img.png");
+	background-color:black;
+	height:2000px;
+}
+a{
+
+	text-decoration: none;
+	color:white;
+}
+b{
+	color:white;
+}
+select{
+	font-family:Misaeng;
+	font-size:20px;
+	border-radius:2px;
+}
+b[name=basic]{
+	font-family:Dokdo;
+	font-size:35px;
+}
+#btn_login{
+	font-size:35px;
+	font-family:Dokdo;
+}
+#btn_sid{
+	font-size:35px;
+	font-family:Dokdo;
+}
+#btn_spw{
+	font-size:35px;
+	font-family:Dokdo;
+}
+#btn_uppw{
+	font-size:35px;
+	font-family:Dokdo;
+}
+#btn_join{
+	font-size:35px;
+	font-family:Dokdo;
+}
+#btn_myinfo{
+	font-size:35px;
+	font-family:Dokdo;
+}
+#login_id{
+	font-size:25px;
+	width:300;
+	border-radius:2px;
+	font-family:Misaeng;
+}
+#id_input{
+	font-size:25px;
+	width:300;
+	border-radius:2px;
+	font-family:Misaeng;
+}
+#login_pw{
+	font-size:25px;
+	border-radius:2px;
+	width:300;
+	font-family:Misaeng;
+}
+#go_login{
+	font-family:Dokdo;
+	font-size:35px;
+}
+#id_form{
+	font-size:25px;
+	width:300;
+	border-radius:2px;
+	font-family:Misaeng;	
+}
+#pw_form{
+	font-size:25px;
+	border-radius:2px;
+	width:300;
+	font-family:Misaeng;
+}
+#rpw_form{
+	font-size:25px;
+	border-radius:2px;
+	width:300;
+	font-family:Misaeng;
+}
+#name_form{
+	font-size:25px;
+	width:300;
+	border-radius:2px;
+	font-family:Misaeng;
+}
+#nick_form{
+	font-size:25px;
+	width:300;
+	border-radius:2px;
+	font-family:Misaeng;
+}
+#email_form{
+	font-size:25px;
+	width:500;
+	border-radius:2px;
+	font-family:Misaeng;
+}
+#r_title{
+	color: white;
+	font-family:Dokdo;
+}
+#main-text{
+		color: #ffffff;
+		font-family: Misaeng;
+}
+input[type=submit]{
+	font-family:Dokdo;
+	color:black;
+	font-size:20px;
+	border-radius:2px;
+}
+#search_write{
+	width:inherit;
+	padding:0px;
+}
+#input_search{
+	font-size:20px;
+	font-family:Misaeng;
+	border-radius: 2px;
+	
+}
+#photoby{
+	font-family:Dokdo;
+	color:white;
+	font-size:25px;
+}
+.wrapper{
+	width : 100%;
+}
+#menu-table{
+	text-align: center;
+}
+#next_pic{
+	cursor:pointer;
+	font-size: 35px;
+	font-weight: bold; 
+	color: white;
+	text-align: center;
+	width:80px;
+	font-family: Dokdo;
+}
+#menu1{
+	font-size: 30px;
+	font-weight: bold; 
+	color: white;
+	text-align: center;
+	width:80px;
+	font-family: Dokdo;
+}
+#menu2{
+	font-size: 30px;
+	font-weight: bold; 
+	color: white;
+	text-align: center;
+	width:80px;
+	font-family: Dokdo;
+}
+#menu3{
+	font-size: 30px;
+	font-weight: bold; 
+	color: white;
+	text-align: center;
+	width:80px;
+	font-family: Dokdo;
+}
+#menu4{
+	font-size: 30px;
+	font-weight: bold; 
+	color: white;
+	text-align: center;
+	width:80px;
+	font-family: Dokdo;
+}
+#board_title{
+	font-size:50px;
+	font-weight: bold;
+	color:white;
+	text-align: center;
+	font-family: Dokdo;
+	margin:10px;
+}
+#board_write{
+	font-size:30px;
+	color:white;
+	font-family: Dokdo;
+}
+.paging{
+	font-family:Misaeng;	
+	font-size:25px;
+}
+.board1{
+	border-top: 2px solid #707070;
+	border-bottom: 2px solid #707070;
+	font-family:Misaeng;
+	width:100%;
+	border-collapse: collapse;
+	align: center;
+}
+.board1-head{
+	background-color: #424242;
+	height:30px;
+	border-bottom: 1px solid #707070;
+	font-size:28px;
+	text-align: center;
+}
+.board-notice{
+	height: 25px;
+	font-size: 12px;
+	border-bottom: 1px solid #707070;
+}
+.board-normal{
+	border-bottom: 1px solid #d0d0d0;
+	font-size: 28px;
+	color:white;
+}
+
+#qdetail{
+	font-size:25px;
+}
+#qt{
+	font-size:22px;
+	color: #CEE3F6;
+	font-weight: 800;
+}
+
+#r_content{
+	font-size:25px;
+	border-bottom:transparent;
+}
+
+#b_list{
+	font-size:25px;
+	color:white;
+	font-family:Dokdo;
+	float:right;
+	text-align:left;
+}
+#btn_write{
+	cursor:pointer;
+	font-size:30px;
+	color:white;
+	font-family:Dokdo;
+	float: center;
+}
+#btn_edit{
+	cursor:pointer;
+	font-size:30px;
+	color:white;
+	font-family:Dokdo;
+	float: center;
+}
+#btn_reply{
+	cursor:pointer;
+	width:70px;
+	height:70px;
+	position: absolute;
+	vertical-align: center;
+	font-family:Misaeng;
+	font-size:25px;
+	
+}
+#r_writer{
+	font-size:25px;
+	border-radius:5px;
+	font-family:Misaeng;
+}
+#r_subject{
+	font-size:25px;
+	border-radius:5px;
+	font-family:Misaeng;
+}
+#r_textarea{
+	font-size:25px;
+	border-radius:5px;
+	font-family:Misaeng;
+}
+#reply_area{
+	font-size:25px;
+	border-radius:2px;
+	font-family:Misaeng;
+	width:50%;
+	height:70px;
+	resize: none;
+}
+#question_area{
+	font-size:25px;
+	border-radius:2px;
+	font-family:Misaeng;
+	width:60%;
+	height:70px;
+	resize: none;
+}
+#reply_name{
+	font-size:25px;
+	border-radius:5px;
+	font-family:Misaeng;
+}
+#reply_pwd{
+	font-size:25px;
+	border-radius:5px;
+	font-family:Misaeng;
+}
+#user_name{
+	font-size:25px;
+	font-family:Misaeng;
+}
+a[name=del_reply_btn]{
+	cursor:pointer;
+}
+#btn_reply_n{
+	cursor:pointer;
+	width:70px;
+	height:70px;
+	position: absolute;
+	vertical-align: center;
+	font-family:Misaeng;
+	font-size:25px;
+	
+}
+#btn_reply_m{
+	cursor:pointer;
+	width:70px;
+	height:70px;
+	position: absolute;
+	vertical-align: center;
+	font-family:Misaeng;
+	font-size:25px;
+	
+}
+
+ul.tabs td.active {
+	font-weight:600;
+    background: #424242;
+}
+.twinkle {
+	color: #F6CED8;
+  	animation: blinker 4.0s cubic-bezier(.5, 0, 1, 1) infinite alternate;
+}
+@keyframes blinker {  
+  50% { opacity: 0.0; }
+}
+
+#btn_upload{
+	display: inline-block;
+	border: 1px solid #c0c0c0;
+	background: #707070;
+	padding: 7px 7px;
+	color: #EDE8D1;
+	vertical-align: middle;
+	line-height: normal;
+	text-align: center;
+	margin: 0px;
+	font-size: 25px;
+	width: auto;
+	border-radius: 4px;
+    font-weight: bold;
+    font-family:Misaeng;
+    cursor:pointer;
+}
+#btn_upload:hover{
+	background: #666666;
+}
+#btn_upload:active{
+	background: #505050;
+}
+
+#user_img{
+	border: 3px solid white;
+	border-radius: 7px;
+	-moz-border-radius: 7px;
+	-khtml-border-radius: 7px;
+	-webkit-border-radius: 7px;
+}
+
+.btn_q_input{
+	width:80px;
+	height:70px;
+	font-family:Misaeng;
+	font-size:25px;
+}
+
+.qg_table{
+	border-top: 2px solid #707070;
+	border-bottom: 2px solid #707070;
+	font-family:Misaeng;
+	width:1000px;
+	border-collapse: collapse;
+	table-layout:fixed;
+	word-break:break-all;
+	align:center;
+	cellpadding:2px;
+}
+.pic_subj{
+	text-shadow: -2px 0 gray, 0 2px gray, 2px 0 gray, 0 -2px gray;
+	font-family:Dokdo;
+	font-size:10px;
+	color:white;
+}
