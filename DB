@@ -1,1 +1,118 @@
 
+drop table R_QGET_GB;
+drop table R_PIC_REPLY;
+drop table R_BOA_REPLY;
+drop table R_QUESTION_GET;
+drop table R_BOARD;
+drop table R_PICTURE;
+drop table R_MEMBER;
+
+drop sequence R_PICTURE_NUM;
+drop sequence R_PIC_REPLY_NUM;
+drop sequence R_MEMBER_NUM;
+drop sequence R_BOARD_NUM;
+drop sequence R_BOA_REPLY_NUM;
+drop sequence R_QUESTION_GET_NUM;
+
+create table R_PICTURE(
+	NUM number constraint RP_PK primary key,
+	PIC varchar2(400) not null,
+	SUBJECT varchar2(400) not null,
+	AUTHOR varchar2(30) not null,
+	RDATE date
+);
+
+CREATE SEQUENCE R_PICTURE_NUM
+INCREMENT BY 1
+START WITH 1
+nocache;
+
+create table R_MEMBER(
+	NUM number constraint RM_PK primary key,
+	ID varchar2(30) constraint RM_ID_UK unique not null,
+	PWD varchar2(300) not null,
+	NAME varchar2(30) not null,
+	NICK varchar2(30) constraint RM_NICK_UK unique not null,
+	EMAIL varchar2(30) constraint RM_EMAIL_UK unique not null,
+	PIC varchar2(300),
+	BIRTH NUMBER(30),
+	RDATE date
+);
+
+CREATE SEQUENCE R_MEMBER_NUM
+INCREMENT BY 1
+START WITH 1
+nocache;
+
+create table R_PIC_REPLY(
+	NUM number constraint RPR_PK primary key,
+	PNUM number not null,
+	ID varchar2(30),
+	PWD varchar2(30),
+	NAME varchar2(30),
+	REPLY varchar2(1000) not null,
+	RDATE date,
+	foreign key(PNUM) references R_PICTURE(NUM) on delete cascade,
+	foreign key(ID) references R_MEMBER(ID) on delete cascade
+);
+
+CREATE SEQUENCE R_PIC_REPLY_NUM
+INCREMENT BY 1
+START WITH 1
+nocache;
+
+create table R_BOARD(
+	NUM number constraint RB_PK primary key,
+	ID varchar2(30) not null,
+	SUBJECT varchar2(200) not null,
+	CONTENT varchar2(3000) not null,
+	READNUM number not null,
+	RDATE date,
+	foreign key(ID) references R_MEMBER(ID) on delete cascade
+);
+
+CREATE SEQUENCE R_BOARD_NUM
+INCREMENT BY 1
+START WITH 1
+nocache;
+
+create table R_BOA_REPLY(
+	NUM number constraint RBR_PK primary key,
+	BNUM number not null,
+	ID varchar2(30) not null,
+	REPLY varchar2(2000) not null,
+	RDATE date,
+	foreign key(BNUM) references R_BOARD(NUM) on delete cascade,
+	foreign key(ID) references R_MEMBER(ID) on delete cascade
+);
+
+CREATE SEQUENCE R_BOA_REPLY_NUM
+INCREMENT BY 1
+START WITH 1
+nocache;
+
+create table R_QUESTION_GET(
+	NUM number constraint RQG_PK primary key, 
+	ID varchar2(30) not null,
+	CONTENT varchar2(1000) not null,
+	GOOD number not null,
+	BAD number not null,
+	RDATE date,
+	foreign key(ID) references R_MEMBER(ID) on delete cascade
+);
+
+CREATE SEQUENCE R_QUESTION_GET_NUM
+INCREMENT BY 1
+START WITH 1
+nocache; 
+
+create table R_QGET_GB(
+	QNUM number,
+	GB varchar2(30) not null,
+	ID varchar2(30) not null,
+	RDATE date,
+	foreign key(QNUM) references R_QUESTION_GET(NUM) on delete cascade,
+	foreign key(ID) references R_MEMBER(ID) on delete cascade
+);
+
+commit;
