@@ -1,0 +1,161 @@
+http://igoto.x-y.net/xe/linux/245
+오라클 JDBC연결, DBCP이용 연결방법
+
+thin 방식
+Class.forName("oracle.jdbc.driver.OracleDriver");
+Connection conn = DriverManager.getConnection ("jdbc:oracle:thin:@10.10.10.10:1521:SID", scott", "tiger");
+
+oci방식
+Class.forName("oracle.jdbc.driver.OracleDriver");
+Connection conn = DriverManager.getConnection ("jdbc:oracle:oci8:@ORCL", scott", "tiger");
+
+*** Oracle RAC 연결방법
+jdbc:oracle:thin:@(DESCRIPTION-(FAIL_OVER=on)(LOAD_BALANCE=on)(ADDRESS=(PROTOCAL=TCP)(HOST=10.10.10.10)(PORT=1521))(ADDRESS=(PROTOCAL=TCP)(HOST=10.10.10.10)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=INTRAC2)))
+
+
+
+###### DBCP를 이용한 연결법 #######
+Connection pool 이란 
+
+Connection pool을 사용하지 않으면 DB에 접속을 한후 다 사용하면 다시 접속를 끊어 버립니다. 
+이는 자원의 비효율성을 나타내고 DB서버에 부하를 줍니다. 
+Connection pool 을 사용하면 Connection pool은 일정갯수을 DB와 연결해 놓고 
+DB 연결이 필요 할때마다 나눠주며 다 사용했으면 반납합니다. 이는 DB 서버에 부하를 최소화 
+할수 있으며 Connection 자원을 효율적으로 사용할수 있어 아주 많이 사용되고 있습니다. 
+DBCP 는 TOMCAT 에서 제공되는 Connection pool 입니다. 
+
+2)Connection pool 사용하지 않는 DB 연결방법 
+
+<%@page    contentType="text/html;charset=euc-kr"    import="java.sql.*"%>  
+<%  
+        String    dBdriver    =    "oracle.jdbc.driver.OracleDriver";  
+        String    dBurl    =    "jdbc:oracle:thin:@xxx.xxx.xxx.xxx:1521:DB명";  
+        String    dBid    =    "xxxxx";  
+        String    dBpwd    =    "xxxxx";  
+        Connection    con    =    null;  
+
+try    {  
+          Class.forName(dBdriver);  
+          con    =    DriverManager.getConnection(dBurl,    dBid,    dBpwd);  
+}catch(Exception    e){  
+
+}  
+%>  
+
+-DBCP 을 이용하여 DB 연결하기 
+
+
+### WEB-INF/web.xml 추가 
+
+<resource-ref> 
+<description>DB Connection</description>
+<res-ref-name>jdbc/MyDB</res-ref-name> 
+<res-type>javax.sql.DataSource</res-type> 
+<res-auth>Container</res-auth> 
+</resource-ref> 
+
+### conf/server.xml    추가  
+                  
+<Context  path="/MyWeb"    docBase="MyWeb"  debug="5"    reloadable="true"    crossContext="true">
+
+        <Resource  name="jdbc/MyDB"    auth="Container"    type="javax.sql.DataSource"  
+            maxActive="100"    maxIdle="30"    maxWait="10000"  
+            username="xxxxx"    password="xxxxx"    driverClassName="oracle.jdbc.driver.OracleDriver"  
+            url="jdbc:oracle:thin:@xxx.xxx.xxx.xxx:1521:DB명"/>
+</Context>
+
+### 결과확인  
+
+<%@page contentType="text/html;charset=euc-kr"  import="java.sql.*,javax.sql.*,javax.naming.*"%>  
+<%  
+
+Connection    con  =  null;  
+try    {  
+          Context    ctx    =    new    InitialContext();  
+          DataSource    ds    =    (DataSource)ctx.lookup("java:comp/env/jdbc/MyDB");  
+          con    =    ds.getConnction();  
+
+}    catch    (Exception    e)    {  
+
+}  
+%> 
+
+
+
+
+
+
+
+Tomcat 6에 Datasource 설정하기
+http://greatkim91.tistory.com/42
+
+Tomcat에서 Datasource 설정하기
+Tomcat에서는 JNDI 리소스를 등록하는 방법이 크게 2가지가 있다. 하나는 모든 web context가 사용할 수 있는 global 리소스이고 다른 하나는 해당 context에만 적용되는 리소스이다.
+
+Global 리소스 등록방법
+${CATALINA_HOME}/conf/server.xml에 다음과 같이 추가
+
+   <Server port="8005" shutdown="SHUTDOWN"> 
+   ... 
+  <GlobalNamingResources> 
+    <!-- Editable user database that can also be used by 
+         UserDatabaseRealm to authenticate users 
+    --> 
+    <Resource name="UserDatabase" auth="Container" 
+              type="org.apache.catalina.UserDatabase" 
+              description="User database that can be updated and saved" 
+              factory="org.apache.catalina.users.MemoryUserDatabaseFactory" 
+              pathname="conf/tomcat-users.xml" /> 
+    
+    <Resource name="jdbc/OracleDS" auth="Container" type="javax.sql.DataSource" 
+          username="xxx" 
+          password="xxx" 
+          driverClassName="oracle.jdbc.driver.OracleDriver" 
+          url="jdbc:oracle:thin:@localhost:1521:XE" /> 
+          
+  </GlobalNamingResources> 
+ ...
+각 web context에서 global 리소스를 사용하기 위해서는 각 context의 <ResourceLink/> 태그로 연결하여야 한다. 다음은 모든 context에 연결하는 방법이다.
+
+${CATALINA_HOME}/conf/context.xml에 다음과 같이 추가
+
+ <Context> 
+    <WatchedResource>WEB-INF/web.xml</WatchedResource> 
+    <ResourceLink 
+            name="jdbc/OracleDS" 
+            global="jdbc/OracleDS" 
+            type="javax.sql.DataSource" 
+          /> 
+...
+
+Context 리소스 등록방법
+tomcat 6.x에서는 각 WAR 디렉토리의 /META-INF/context.xml 파일에 해당 context 설정 정보를 담고 있다. 즉 WAR 파일 내에 context.xml 이 있어야 한다. 편하긴 한데...
+
+예) bcf가 context라면
+
+${CATALINA_HOME}/webapps/bcf/META-INF/context.xml 에 다음과 같이 추가
+
+<Context antiResourceLocking="false" privileged="true"> 
+<Resource name="jdbc/OracleDS" auth="Container" type="javax.sql.DataSource" 
+          username="xxx" 
+          password="xxx" 
+          driverClassName="com.mysql.jdbc.Driver" 
+          url="jdbc:mysql://localhost:3306/bcf" /> 
+</Context>
+
+JNDI로 접근하기
+다른 JNDI 룩업과 마찬가지로 다음과 같은 이름로 접근하면 된다. 그냥 jdbc/OracleDS 이런식으로는 접근할 수 없다. 
+
+java:comp/env/jdbc/OracleDS
+
+정리
+Context 리소스 등록방법이 context.xml을 war/MET-INF 밑에 넣으면 되기 때문에 더 편하기는 한데 war에 저 파일이 배포되어야해서 좀 찜찜하다. (datasource 정보가 WAR 형상관리되어야 한다?)
+
+따라서 운영환경에서는 global 리소스를 이용하는 방법이 나을 듯 하다. (역시 비밀번호는 노출이 되는군 ㅠㅠ)
+
+
+
+
+
++추가사이트
+http://soul0.tistory.com/219

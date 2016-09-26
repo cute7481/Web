@@ -1,0 +1,94 @@
+<script type="text/javascript">//class 삭제
+$("#number a").click(function(){
+	$("#number a").removeClass("pgnumber").css("font-weight", "normal");
+    //$(this).addClass("pgnumber").css("font-weight", "600");
+})
+</script>
+
+
+<script type="text/javascript">//class 입히기
+var cur_pg = request.getAttribute("cur_pg");
+	if (cur_pg == null) {
+		cur_pg = 1;
+	}
+function pgchange(cur){
+	$("#number a").removeClass("pgnumber").css("font-weight", "normal");
+	$("#cur" + cur).addClass("pgnumber").css("font-weight", "600");	
+}
+</script>
+
+#number a.pgnumber {
+    font-weight:600;
+}
+
+
+
+
+<script type="text/javascript"> //tab change
+$(".tab_qContent").hide();
+
+if(location.hash="#tab1_qgList"){
+	$(".tab_qContent").eq(1).show();
+}else{
+	$(".tab_qContent").eq(0).show();
+}
+//$(".tab_qContent:first").show();
+/*
+if(localStorage.activeTab == null){
+	$(".tab_qContent").hide();
+	$(".tab_qContent:first").show();
+}else{
+	$("ul.tabs td").removeClass("active").css("font-weight", "normal");
+ 	$("#" + localStorage.activeTab).addClass("active").css("font-weight", "600");
+ 	$(".tab_qContent").hide();
+	$("#" + localStorage.activeTab).show();
+}
+*/
+$(function () {
+    $("ul.tabs td").click(function () {
+        $("ul.tabs td").removeClass("active").css("font-weight", "normal");
+        //$(this).addClass("active").css({"color": "white","font-weight": '600'});
+        $(this).addClass("active").css("font-weight", "600");
+        $(".tab_qContent").hide();
+        var activeTab = $(this).attr("rel");
+        $("#" + activeTab).fadeIn();
+       
+        /*
+        if(localStorage.activeTab != null){
+        	localStorage.removeItem("activeTab");
+        }	
+        localStorage.setItem("activeTab", activeTab);
+        */
+        location.href= "#"+activeTab;
+    });
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /*
+        if(localStorage.activeTab != null){
+        	localStorage.removeItem("activeTab");
+        }	
+        localStorage.setItem("activeTab", activeTab);
+        */
+
+
+
+
+
+
+
+
